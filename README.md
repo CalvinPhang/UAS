@@ -1,9 +1,9 @@
 # UAS
 Code Base UAS Pemrograman Web Berbasis IoT
 
-- Temperature Sensor
-Fungsi  : mengukur suhu area smart farm
-Jangkah : 10 - 50 °C
+1. Temperature Sensor
+    - Fungsi  : mengukur suhu area smart farm
+    - Jangkah : 10 - 50 °C
 - Soil Moisture Sensor 
     - Fungsi  : mengukur kelembapan tanah
     - Jangkah : 0 - 100 %
