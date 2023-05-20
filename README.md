@@ -17,7 +17,7 @@ Code Base UAS Pemrograman Web Berbasis IoT
 
 Jika suhu terlalu tinggi/terlalu rendah maka air yang dialirkan berkurang\
 Jika intensitas cahaya meningkat maka air yang dialirkan meningkat\
-Jika kelembapan tanah menurun maka air yang dialirkan meningkat\
+Jika kelembapan tanah menurun maka air yang dialirkan meningkat
 
 
 Training data (machinelearning/irrigation.csv)
