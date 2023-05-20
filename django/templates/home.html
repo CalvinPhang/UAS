@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard</title> 
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  
+</head>
+  
+<body>
+  <img src="{% static 'CIT.jpeg' %}" style="float: left; height: 75px; margin-left: 40px;">
+  <img src="{% static 'IEE.png' %}" style="float: right; height: 75px; margin-right: 40px;">
+  <center class="row" style="background-color: #002B5B; padding-bottom: 20px;">
+    <h1 style="color: white"><b>Smart Farm System Dashboard</b></h1>
+  </center>
+
+  <div style="background-color: #1A5F7A; padding: 1px">
+    <div class="row" style="padding: 0 14px;">
+      <div class="col-md-6" style="padding: 1px">
+        <div style="border-radius: 10px; margin: 10px; background-color: #D8D8D8; padding: 5px;">
+          <h3>Temperature: <span id="temperature"></span> &#176;C</h3>
+          <canvas id="temperature-chart"></canvas>
+        </div>
+      </div>
+      <div class="col-md-6" style="padding: 1px">
+        <div style="border-radius: 10px; margin: 10px;background-color: #D8D8D8; padding: 5px;">
+          <h3>Soil Moisture: <span id="moisture"></span> %</h3>
+          <canvas id="moisture-chart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="padding: 0 14px;">
+      <div class="col-md-6" style="padding: 1px">
+        <div style="border-radius: 10px; margin: 10px; background-color: #D8D8D8; padding: 5px;">
+          <h3>Light Intensity: <span id="light"></span> lux</h3>
+          <canvas id="light-chart"></canvas>
+        </div>
+      </div>
+      <div class="col-md-6" style="padding: 1px">
+        <div style="border-radius: 10px; margin: 10px;background-color: #D8D8D8; padding: 5px;">
+          <h3>Irrigation System: <span id="irrigation"></span> L</h3>
+          <canvas id="irrigation-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  function initializeGraph(chart_var, endpoint, id, color){
+    $.ajax({
+      method: "GET",
+      url: endpoint,
+      success: function(data) {
+        drawLineGraph(chart_var, data, id, color);
+      },
+      error: function(error_data) {
+        console.log(error_data);
+      }
+    })
+  }
+
+  function drawLineGraph(chart_var, data, id, color) {
+    var labels = data.time_data;
+    var chartLabel = data.chart_label;
+    var chartdata = data.chart_data;
+    var ctx = document.getElementById(id).getContext('2d');
+    window[chart_var] = new Chart(ctx, {
+        // The type of chart we want to create
+      type: 'line',
+  
+        // The data for our dataset
+      data: {
+        labels: labels,
+        datasets: [{
+          label: chartLabel,
+          backgroundColor: 'rgb(255, 100, 200, 0)',
+          borderColor: color,
+          data: chartdata,
+        }]
+      },
+
+      // Configuration options go here
+      options: {
+        elements: {
+            line: {
+              tension: 0
+            }
+          },
+        scales: {
+          xAxes: [{
+            display: true,
+          }],
+          yAxes: [{
+              ticks: {
+                  // suggestedMin: 30,
+                  // suggestedMax: 150,
+              }
+          }]
+        }
+      }
+  
+    });
+  }
+
+  function updateGraph(chart_var, endpoint) {
+    $.ajax({
+      method: "GET",
+      url: endpoint,
+      success: function(data) {
+          window[chart_var].data.labels = data.time_data;
+          window[chart_var].data.datasets[0].data = data.chart_data;
+          window[chart_var].update();
+      },
+      error: function(error_data) {
+          console.log(error_data);
+      }
+    })
+  }
+
+  function updateSensorValue(endpoint, id) {
+    $.ajax({
+      method: "GET",
+      url: endpoint,
+      success: function(data) {
+          var value = document.getElementById(id);
+          value.innerHTML = data.value;
+      },
+      error: function(error_data) {
+          console.log(error_data);
+      }
+    })
+  }
+
+  function updateActuatorState(endpoint, id) {
+    $.ajax({
+      method: "GET",
+      url: endpoint,
+      success: function(data) {
+          var state = document.getElementById(id);
+          state.innerHTML = data.state;
+      },
+      error: function(error_data) {
+          console.log(error_data);
+      }
+    })
+  }
+
+  var temperature_graph;
+  var moisture_graph;
+  var light_graph;
+  var irrigation_graph;
+
+  initializeGraph('temperature_graph', '/sensor/temperature', 'temperature-chart', 'rgb(12, 19, 79) ');
+  initializeGraph('moisture_graph', '/sensor/moisture', 'moisture-chart', 'rgb(240, 138, 93)');
+  initializeGraph('light_graph', '/sensor/light', 'light-chart', 'rgb(184, 59, 94)');
+  initializeGraph('irrigation_graph', '/actuator/irrigation', 'irrigation-chart', 'rgb(106, 44, 112)');
+
+  setInterval(function(){
+    updateSensorValue('/sensor/temperature', 'temperature');
+    updateSensorValue('/sensor/moisture', 'moisture');
+    updateSensorValue('/sensor/light', 'light');
+    updateActuatorState('/actuator/irrigation', 'irrigation');
+
+    updateGraph('temperature_graph', '/sensor/temperature');
+    updateGraph('moisture_graph', '/sensor/moisture');
+    updateGraph('light_graph', '/sensor/light');
+    updateGraph('irrigation_graph', '/actuator/irrigation');
+
+  }, 1000);
+
+</script>
+<style>
+  /* .containers {
+    padding: 20px;
+  } */
+  h3 {
+    text-align: center;
+  }
+</style>

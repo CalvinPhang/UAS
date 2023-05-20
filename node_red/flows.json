@@ -1,0 +1,310 @@
+[
+    {
+        "id": "0b81c40f8b0ee48d",
+        "type": "tab",
+        "label": "UAS",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "240f745f0dc79a59",
+        "type": "random",
+        "z": "0b81c40f8b0ee48d",
+        "name": "10 - 50 °C",
+        "low": "10",
+        "high": "50",
+        "inte": "true",
+        "property": "payload",
+        "x": 480,
+        "y": 280,
+        "wires": [
+            [
+                "81be27d745466d4c",
+                "e0bd02b8eafa059f",
+                "9df1fb96b13b1ba5"
+            ]
+        ]
+    },
+    {
+        "id": "192431fba3eb26de",
+        "type": "random",
+        "z": "0b81c40f8b0ee48d",
+        "name": "0-100 %",
+        "low": "0",
+        "high": "100",
+        "inte": "true",
+        "property": "payload",
+        "x": 480,
+        "y": 360,
+        "wires": [
+            [
+                "42ece29f218b8e47",
+                "935734db01b5b3f2",
+                "1fbf5ca85b97efbf"
+            ]
+        ]
+    },
+    {
+        "id": "11b5697e26c0f716",
+        "type": "random",
+        "z": "0b81c40f8b0ee48d",
+        "name": "0-10000 lux",
+        "low": "0",
+        "high": "10000",
+        "inte": "true",
+        "property": "payload",
+        "x": 490,
+        "y": 440,
+        "wires": [
+            [
+                "83e0003ab9a07436",
+                "4f6dbde01707eb53",
+                "e1ae7d08b83a1af0"
+            ]
+        ]
+    },
+    {
+        "id": "dbb1941d7a2b1564",
+        "type": "comment",
+        "z": "0b81c40f8b0ee48d",
+        "name": "Smart Farm",
+        "info": "test",
+        "x": 490,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "81be27d745466d4c",
+        "type": "debug",
+        "z": "0b81c40f8b0ee48d",
+        "name": "Temperature Sensor",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "42ece29f218b8e47",
+        "type": "debug",
+        "z": "0b81c40f8b0ee48d",
+        "name": "Soil Moisture Sensor",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "83e0003ab9a07436",
+        "type": "debug",
+        "z": "0b81c40f8b0ee48d",
+        "name": "Light Intensity Sensor",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "e0bd02b8eafa059f",
+        "type": "mqtt out",
+        "z": "0b81c40f8b0ee48d",
+        "name": "",
+        "topic": "smartfarm/temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a06e2cd503d56e96",
+        "x": 820,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "935734db01b5b3f2",
+        "type": "mqtt out",
+        "z": "0b81c40f8b0ee48d",
+        "name": "",
+        "topic": "smartfarm/soil",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a06e2cd503d56e96",
+        "x": 800,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "4f6dbde01707eb53",
+        "type": "mqtt out",
+        "z": "0b81c40f8b0ee48d",
+        "name": "",
+        "topic": "smartfarm/light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a06e2cd503d56e96",
+        "x": 800,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "1fbf5ca85b97efbf",
+        "type": "ui_text",
+        "z": "0b81c40f8b0ee48d",
+        "group": "cb0c5efbaf13c3de",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Soil Moisture Sensor",
+        "format": "{{msg.payload}} %",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1140,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "e1ae7d08b83a1af0",
+        "type": "ui_text",
+        "z": "0b81c40f8b0ee48d",
+        "group": "cb0c5efbaf13c3de",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Light Intensity Sensor",
+        "format": "{{msg.payload}} lux",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1140,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "9df1fb96b13b1ba5",
+        "type": "ui_text",
+        "z": "0b81c40f8b0ee48d",
+        "group": "cb0c5efbaf13c3de",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Temperature Sensor",
+        "format": "{{msg.payload}} °C",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1140,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "0edd482a0b758d2c",
+        "type": "inject",
+        "z": "0b81c40f8b0ee48d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 360,
+        "wires": [
+            [
+                "240f745f0dc79a59",
+                "192431fba3eb26de",
+                "11b5697e26c0f716"
+            ]
+        ]
+    },
+    {
+        "id": "a06e2cd503d56e96",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "cb0c5efbaf13c3de",
+        "type": "ui_group",
+        "name": "Smart Farm",
+        "tab": "79bd39d4bc7c16e6",
+        "order": 15,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "79bd39d4bc7c16e6",
+        "type": "ui_tab",
+        "name": "Smart Farm",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
