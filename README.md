@@ -1,15 +1,15 @@
 # UAS
 Code Base UAS Pemrograman Web Berbasis IoT
 
-A. Temperature Sensor
-    - Fungsi  : mengukur suhu area smart farm
-    - Jangkah : 10 - 50 °C
-B. Soil Moisture Sensor 
+- Temperature Sensor
+Fungsi  : mengukur suhu area smart farm
+Jangkah : 10 - 50 °C
+- Soil Moisture Sensor 
     - Fungsi  : mengukur kelembapan tanah
     - Jangkah : 0 - 100 %
 C. Light Intensity Sensor
-    - Fungsi  : mengukur jumlah cahaya di area smart farm
-    - Jangkah : 0 - 10000 lux
+Fungsi  : mengukur jumlah cahaya di area smart farm
+Jangkah : 0 - 10000 lux
 D. Irrigation System
     - Fungsi  : mengalirkan air ke dalam Smart Farm untuk membasahi tanah
     - Jangkah : 0 - 100 L
